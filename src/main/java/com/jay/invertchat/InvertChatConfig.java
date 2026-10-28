@@ -22,14 +22,50 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jay.chatdown;
-import net.runelite.client.RuneLite;
-import net.runelite.client.externalplugins.ExternalPluginManager;
-public class ChatDownPluginTest
+package com.jay.invertchat;
+
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.Range;
+
+@ConfigGroup(InvertChatConfig.GROUP)
+public interface InvertChatConfig extends Config
 {
-	public static void main(String[] args) throws Exception
+	// Retain the original group to preserve existing saved settings.
+	String GROUP = "jay-chat-down";
+
+	@ConfigItem(
+		keyName = "followSplitChat",
+		name = "Split chat below",
+		description = "Keep split private messages below the open chatbox, or below the stones when collapsed",
+		position = 0
+	)
+	default boolean followSplitChat()
 	{
-		ExternalPluginManager.loadBuiltin(ChatDownPlugin.class);
-		RuneLite.main(args);
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "interactionTextBottomLeft",
+		name = "Interaction text bottom-left",
+		description = "Move the top-left hover-action text to the bottom-left of the game canvas",
+		position = 2
+	)
+	default boolean interactionTextBottomLeft()
+	{
+		return true;
+	}
+
+	@Range(min = 0, max = 30)
+	@ConfigItem(
+		keyName = "splitChatGap",
+		name = "Split chat gap",
+		description = "Space in pixels between the chatbox and split private messages",
+		position = 1
+	)
+	default int splitChatGap()
+	{
+		return 4;
 	}
 }

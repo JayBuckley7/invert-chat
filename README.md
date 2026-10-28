@@ -1,13 +1,15 @@
-# Chat Down
+# Invert Chat
 
-A RuneLite plugin that puts chat stones above the native chatbox so opening it expands downwards. Split private chat follows beneath the open box, or beneath the stones when collapsed. If there is insufficient space beneath the box, private messages retain their native position.
+Opens chat downward, with the chat buttons on top and split private messages underneath.
 
-Hover-action text is shown at the bottom-left instead of overlapping the stones. Disable **Interaction text bottom-left** in settings to keep its native position.
+Alt-drag the chatbox to position it. Resizable mode only.
 
-Enable **Chat Down** in a resizable client. Use RuneLite's existing Alt-drag to move the chatbox to the top edge. Fixed mode keeps the normal layout. Disabling the plugin restores the positions it owns.
+Optionally moves hover-action text to the bottom-left.
 
-Development: Java 11-compatible sources, `./gradlew test jar`, or `./gradlew run` to launch the official development client. Hot reload tooling stays outside the plugin.
+### Default (collapsed)
 
-Manual checks: open/collapse each chat tab without moving the stones; type and scroll; receive split private messages with chat open and closed; test a dialogue and a resized window; disable the plugin and check the native layout returns.
+![Default chat layout with chat collapsed](docs/default.png)
 
+### Invert Chat
 
+![Chat expanded downwards at the top of the screen, with private messages underneath](docs/top-down.png)

@@ -22,7 +22,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jay.chatdown;
+package com.jay.invertchat;
 import java.util.concurrent.atomic.AtomicBoolean;
 import net.runelite.api.Client;
 import net.runelite.api.MenuEntry;

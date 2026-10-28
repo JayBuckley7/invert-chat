@@ -22,7 +22,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jay.chatdown;
+package com.jay.invertchat;
 
 import java.util.Collections;
 import java.util.IdentityHashMap;
@@ -33,7 +33,7 @@ import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
 
 /** Changes only widget placement. Visibility, contents, events and scrolling stay native. */
-final class ChatDownLayout
+final class InvertChatLayout
 {
 	private final Map<Widget, Placement> owned = new IdentityHashMap<>();
 

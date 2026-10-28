@@ -22,7 +22,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jay.chatdown;
+package com.jay.invertchat;
 
 import net.runelite.api.Point;
 import net.runelite.api.widgets.Widget;
@@ -36,7 +36,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ChatDownLayoutTest
+public class InvertChatLayoutTest
 {
 	private static final class Box
 	{
@@ -74,7 +74,7 @@ public class ChatDownLayoutTest
 	{
 		Box root = new Box(165), stones = new Box(23), area = new Box(142);
 		stones.position[3] = 2;
-		ChatDownLayout layout = new ChatDownLayout();
+		InvertChatLayout layout = new InvertChatLayout();
 		layout.apply(root.widget, stones.widget, area.widget, null, true, 4);
 		assertEquals(0, stones.position[1]);
 		assertEquals(0, stones.position[3]);
@@ -98,7 +98,7 @@ public class ChatDownLayoutTest
 		when(older.widget.getRelativeY()).thenReturn(900);
 		when(newer.widget.getRelativeY()).thenReturn(920);
 		when(pm.widget.getChildren()).thenReturn(new Widget[] {older.widget, newer.widget});
-		ChatDownLayout layout = new ChatDownLayout();
+		InvertChatLayout layout = new InvertChatLayout();
 		layout.apply(root.widget, stones.widget, area.widget, pm.widget, true, 4);
 		assertEquals(50, pm.position[0]);
 		assertEquals(10 + 165 + 4 - 900, pm.position[1]);
@@ -117,7 +117,7 @@ public class ChatDownLayoutTest
 		when(root.widget.getCanvasLocation()).thenReturn(new Point(0, 950));
 		when(line.widget.getRelativeY()).thenReturn(900);
 		when(pm.widget.getChildren()).thenReturn(new Widget[] {line.widget});
-		ChatDownLayout layout = new ChatDownLayout();
+		InvertChatLayout layout = new InvertChatLayout();
 		layout.apply(root.widget, stones.widget, area.widget, pm.widget, true, 4);
 		assertEquals(0, pm.position[1]);
 		verify(pm.widget, never()).revalidate();
@@ -128,7 +128,7 @@ public class ChatDownLayoutTest
 	{
 		Box root = new Box(165), stones = new Box(23), area = new Box(142);
 		stones.position[3] = 2;
-		ChatDownLayout layout = new ChatDownLayout();
+		InvertChatLayout layout = new InvertChatLayout();
 		layout.apply(root.widget, stones.widget, area.widget, null, true, 4);
 		stones.position[1] = 7;
 		stones.position[3] = 2;
@@ -142,7 +142,7 @@ public class ChatDownLayoutTest
 	public void disablingDoesNotUndoAnotherOwnersLaterEdit()
 	{
 		Box root = new Box(165), stones = new Box(23), area = new Box(142);
-		ChatDownLayout layout = new ChatDownLayout();
+		InvertChatLayout layout = new InvertChatLayout();
 		layout.apply(root.widget, stones.widget, area.widget, null, true, 4);
 		area.position[1] = 80;
 		layout.restore();
@@ -156,7 +156,7 @@ public class ChatDownLayoutTest
 			newArea = new Box(142);
 		oldStones.position[3] = 2;
 		newStones.position[3] = 2;
-		ChatDownLayout layout = new ChatDownLayout();
+		InvertChatLayout layout = new InvertChatLayout();
 		layout.apply(root.widget, oldStones.widget, oldArea.widget, null, true, 4);
 		layout.apply(root.widget, newStones.widget, newArea.widget, null, true, 4);
 		assertEquals(2, oldStones.position[3]);

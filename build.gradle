@@ -13,7 +13,7 @@ repositories {
 }
 
 def runeLiteVersion = 'latest.release'
-def pluginMainClass = 'com.jay.chatdown.ChatDownPluginTest'
+def pluginMainClass = 'com.jay.invertchat.InvertChatPluginTest'
 
 dependencies {
 	compileOnly group: 'net.runelite', name:'client', version: runeLiteVersion
@@ -27,7 +27,7 @@ dependencies {
 	testImplementation group: 'net.runelite', name:'jshell', version: runeLiteVersion
 }
 
-group = 'com.jay.chatdown'
+group = 'com.jay.invertchat'
 
 tasks.withType(JavaCompile).configureEach {
 	options.encoding = 'UTF-8'

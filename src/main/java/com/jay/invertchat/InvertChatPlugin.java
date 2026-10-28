@@ -22,7 +22,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.jay.chatdown;
+package com.jay.invertchat;
 
 import com.google.inject.Provides;
 import javax.inject.Inject;
@@ -41,11 +41,11 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
 
 @PluginDescriptor(
-	name = "Chat Down",
-	description = "Put chat stones above the message box and expand chat downward",
+	name = "Invert Chat",
+	description = "Open chat downwards with the chat buttons on top",
 	tags = {"chatbox", "layout", "interface", "private"}
 )
-public class ChatDownPlugin extends Plugin
+public class InvertChatPlugin extends Plugin
 {
 	@Inject
 	private Client client;
@@ -54,7 +54,7 @@ public class ChatDownPlugin extends Plugin
 	private ClientThread clientThread;
 
 	@Inject
-	private ChatDownConfig config;
+	private InvertChatConfig config;
 
 	@Inject
 	private InteractionTextOverlay interactionText;
@@ -62,13 +62,13 @@ public class ChatDownPlugin extends Plugin
 	@Inject
 	private OverlayManager overlays;
 
-	private final ChatDownLayout layout = new ChatDownLayout();
+	private final InvertChatLayout layout = new InvertChatLayout();
 	private volatile boolean active;
 
 	@Provides
-	ChatDownConfig provideConfig(ConfigManager manager)
+	InvertChatConfig provideConfig(ConfigManager manager)
 	{
-		return manager.getConfig(ChatDownConfig.class);
+		return manager.getConfig(InvertChatConfig.class);
 	}
 
 	@Override
