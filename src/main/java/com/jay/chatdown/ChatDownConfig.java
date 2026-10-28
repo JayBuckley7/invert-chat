@@ -13,7 +13,11 @@ public interface ChatDownConfig extends Config
     @ConfigItem(keyName = "followSplitChat", name = "Split chat below", description = "Keep split private messages below the open chatbox, or below the stones when collapsed", position = 0)
     default boolean followSplitChat() { return true; }
 
+    @ConfigItem(keyName = "interactionTextBottomLeft", name = "Interaction text bottom-left", description = "Move the top-left hover-action text to the bottom-left of the game canvas", position = 2)
+    default boolean interactionTextBottomLeft() { return true; }
+
     @Range(min = 0, max = 30)
     @ConfigItem(keyName = "splitChatGap", name = "Split chat gap", description = "Space in pixels between the chatbox and split private messages", position = 1)
     default int splitChatGap() { return 4; }
 }
+

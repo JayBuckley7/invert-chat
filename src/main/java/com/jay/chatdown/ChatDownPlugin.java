@@ -20,12 +20,14 @@ public class ChatDownPlugin extends Plugin
     @Inject private Client client;
     @Inject private ClientThread clientThread;
     @Inject private ChatDownConfig config;
+    @Inject private InteractionTextOverlay interactionText;
+    @Inject private net.runelite.client.ui.overlay.OverlayManager overlays;
     private final ChatDownLayout layout = new ChatDownLayout();
     private volatile boolean active;
 
     @Provides ChatDownConfig provideConfig(ConfigManager manager) { return manager.getConfig(ChatDownConfig.class); }
-    @Override protected void startUp() { active=true; clientThread.invokeLater(this::update); }
-    @Override protected void shutDown() { active=false; clientThread.invokeLater(layout::restore); }
+    @Override protected void startUp() { active=true; overlays.add(interactionText); clientThread.invokeLater(this::update); }
+    @Override protected void shutDown() { active=false; overlays.remove(interactionText); clientThread.invokeLater(() -> { layout.restore(); interactionText.restore(); }); }
     @Subscribe public void onBeforeRender(BeforeRender event) { update(); }
     @Subscribe public void onScriptPostFired(ScriptPostFired event)
     {
@@ -37,7 +39,9 @@ public class ChatDownPlugin extends Plugin
     private void update()
     {
         if (!active) return;
-        if (client.getGameState()!=GameState.LOGGED_IN || !client.isResized()) { layout.restore(); return; }
+        boolean available=client.getGameState()==GameState.LOGGED_IN && client.isResized();
+        interactionText.update(available && config.interactionTextBottomLeft());
+        if (!available) { layout.restore(); return; }
         Widget root=client.getWidget(InterfaceID.Chatbox.UNIVERSE);
         Widget stones=client.getWidget(InterfaceID.Chatbox.CONTROLS);
         Widget area=client.getWidget(InterfaceID.Chatbox.CHATAREA);
@@ -46,4 +50,5 @@ public class ChatDownPlugin extends Plugin
         layout.apply(root, stones, area, client.getWidget(InterfaceID.PmChat.CONTAINER), config.followSplitChat(), config.splitChatGap());
     }
 }
+
 
